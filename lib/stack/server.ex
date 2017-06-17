@@ -5,19 +5,23 @@ defmodule Stack.Server do
 
   # Client API
   def start_link(initial_stack \\ []) do
-    GenServer.start_link(__MODULE__, initial_stack)
+    GenServer.start_link(__MODULE__, initial_stack, name: __MODULE__)
   end
 
-  def pop(pid) do
-    GenServer.call(pid, :pop)
+  def pop do
+    GenServer.call(__MODULE__, :pop)
   end
 
-  def push(pid, v) do
-    GenServer.cast(pid, {:push, v})
+  def push v do
+    GenServer.cast(__MODULE__, {:push, v})
   end
 
-  def length(pid) do
-    GenServer.call(pid, :length)
+  def length do
+    GenServer.call(__MODULE__, :length)
+  end
+
+  def crash do
+    GenServer.call(__MODULE__, :crash)
   end
 
   # Server callbacks
