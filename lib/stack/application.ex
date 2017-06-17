@@ -8,10 +8,12 @@ defmodule Stack.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    stash = Stack.Stash.start_link([1,2,3])
+
     # Define workers and child supervisors to be supervised
     children = [
       # Starts a worker by calling: Stack.Worker.start_link(arg1, arg2, arg3)
-      worker(Stack.Server, [[1,2,3]]),
+      worker(Stack.Server, [stash]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

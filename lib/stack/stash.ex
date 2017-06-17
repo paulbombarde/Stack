@@ -14,6 +14,10 @@ defmodule Stack.Stash do
     GenServer.call(pid, {:unstash})
   end
 
+  def crash pid do
+    GenServer.call(pid, :crash)
+  end
+
   def handle_cast({:stash, state}, _) do
     {:noreply, state}
   end
