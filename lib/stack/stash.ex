@@ -1,8 +1,8 @@
 defmodule Stack.Stash do
   use GenServer
 
-  def start_link do
-    {:ok, pid} = GenServer.start_link(__MODULE__, [])
+  def start_link state do
+    {:ok, pid} = GenServer.start_link(__MODULE__, state)
     pid
   end
 
